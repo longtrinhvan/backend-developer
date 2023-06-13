@@ -1,0 +1,5 @@
+rootProject.name = 'backend-developer'
+include 'webservice'
+include 'webservice:com.spring.api'
+findProject(':webservice:com.spring.api')?.name = 'com.spring.api'
+
