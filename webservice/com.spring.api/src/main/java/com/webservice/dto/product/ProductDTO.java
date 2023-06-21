@@ -16,7 +16,9 @@ public class ProductDTO implements Serializable {
 
     public int manufacturerId;
 
-    public int isActive;
+    public int isActived;
+
+    public int isDeleted;
 
     public Date createdDate;
 
@@ -27,8 +29,6 @@ public class ProductDTO implements Serializable {
     public Date updatedDate;
 
     public String updatedUser;
-
-    public int isDeleted;
 
     public Date deletedDate;
 
@@ -41,8 +41,4 @@ public class ProductDTO implements Serializable {
     public String keyword;
 
     public String url;
-
-    public String mImage;
-
-    public String sImage;
 }

@@ -1,8 +1,9 @@
-package com.webservice.controller;
+package com.webservice.controller.user;
 
 import com.webservice.dto.user.UserDTO;
 import com.webservice.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@Lazy
 @RequestMapping("/users")
 public class UserController {
 
@@ -17,8 +19,8 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getOne(int userID) {
-        HttpStatus httpStatus = HttpStatus.ACCEPTED;
+    public ResponseEntity<UserDTO> getOne(@PathVariable("id") final int userID) {
+        HttpStatus httpStatus = HttpStatus.OK;
         UserDTO result = null;
         try {
             result = userService.getOne(userID);
@@ -31,7 +33,7 @@ public class UserController {
 
     @GetMapping("/findalls")
     public ResponseEntity<List<UserDTO>> findAlls() {
-        HttpStatus httpStatus = HttpStatus.ACCEPTED;
+        HttpStatus httpStatus = HttpStatus.OK;
         List<UserDTO> result = null;
         try {
             result = userService.findAlls();

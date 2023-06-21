@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface IProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("SELECT u FROM Product u WHERE u.id = :id")
     Product getOne(@Param("id") Integer id);

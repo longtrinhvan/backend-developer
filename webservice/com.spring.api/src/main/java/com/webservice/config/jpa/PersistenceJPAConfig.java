@@ -1,4 +1,4 @@
-package com.webservice.config;
+package com.webservice.config.jpa;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;

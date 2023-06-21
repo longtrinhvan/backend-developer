@@ -2,7 +2,7 @@ package com.webservice.service.product;
 
 import com.webservice.dto.product.ProductDTO;
 import com.webservice.dto.product.ProductMapper;
-import com.webservice.repository.ProductRepository;
+import com.webservice.repository.IProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 public class ProductService implements IProductService {
 
     private final ProductMapper productMapper;
-    private final ProductRepository productRepository;
+    private final IProductRepository productRepository;
 
     @Autowired
-    public ProductService(ProductMapper productMapper, ProductRepository productRepository) {
+    public ProductService(ProductMapper productMapper, IProductRepository productRepository) {
         this.productMapper = productMapper;
         this.productRepository = productRepository;
     }

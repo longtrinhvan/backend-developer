@@ -1,17 +1,12 @@
 package com.webservice.dto.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.webservice.dto.role.RoleDTO;
-import com.webservice.dto.role.RoleWithoutUsers;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Collection;
-
 
 @Data
-public class UserDTO implements Serializable {
+public class UserWithoutRoles implements Serializable {
 
     public int useId;
 
@@ -32,6 +27,4 @@ public class UserDTO implements Serializable {
     public Integer status;
 
     public String password;
-
-    public Collection<RoleWithoutUsers> roles;
 }

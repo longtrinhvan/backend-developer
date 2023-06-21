@@ -1,6 +1,7 @@
 package com.webservice.model;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,59 +14,54 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "productid")
-    public int productId;
+    private int productId;
 
     @Column(name = "productname")
-    public String productName;
+    private String productName;
 
     @Column(name = "categoryid")
-    public int categoryId;
+    private int categoryId;
 
     @Column(name = "manufacturerid")
-    public int manufacturerId;
+    private int manufacturerId;
 
-    @Column(name = "isactive")
-    public int isActive;
-
-    @Column(name = "createddate")
-    public Date createdDate;
-
-    @Column(name = "activateddate")
-    public Date activatedDate;
-
-    @Column(name = "createduser")
-    public String createdUser;
-
-    @Column(name = "updateddate")
-    public Date updatedDate;
-
-    @Column(name = "updateduser")
-    public String updatedUser;
+    @Column(name = "isactived")
+    private int isActived;
 
     @Column(name = "isdeleted")
-    public int isDeleted;
+    private int isDeleted;
+
+    @Column(name = "createddate")
+    private Date createdDate;
+
+    @Column(name = "activateddate")
+    private Date activatedDate;
+
+    @Column(name = "createduser")
+    private String createdUser;
+
+    @Column(name = "updateddate")
+    private Date updatedDate;
+
+    @Column(name = "updateduser")
+    private String updatedUser;
 
     @Column(name = "deleteddate")
-    public Date deletedDate;
+    private Date deletedDate;
 
     @Column(name = "deleteduser")
-    public String deletedUser;
+    private String deletedUser;
 
     @Column(name = "price")
-    public double price;
+    private double price;
 
     @Column(name = "description")
-    public String description;
+    private String description;
 
     @Column(name = "keyword")
-    public String keyword;
+    private String keyword;
 
     @Column(name = "url")
-    public String url;
+    private String url;
 
-    @Column(name = "mimage")
-    public String mImage;
-
-    @Column(name = "simage")
-    public String sImage;
 }

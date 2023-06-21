@@ -1,8 +1,9 @@
 package com.webservice.controller;
 
-import com.webservice.dto.product.ProductDTO;
-import com.webservice.service.product.IProductService;
+import com.webservice.dto.user.UserDTO;
+import com.webservice.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,18 +11,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/products")
-public class ProductController {
+@Lazy
+@RequestMapping("/test")
+public class TestController {
 
     @Autowired
-    private IProductService iproductService;
+    private IUserService userService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> getOne(@PathVariable("id") int productID) {
-        HttpStatus httpStatus = HttpStatus.ACCEPTED;
-        ProductDTO result = null;
+    public ResponseEntity<UserDTO> getOne(@PathVariable("id") final int userID) {
+        HttpStatus httpStatus = HttpStatus.OK;
+        UserDTO result = null;
         try {
-            result = iproductService.getOne(productID);
+            result = userService.getOne(userID);
         } catch (Throwable e) {
             e.printStackTrace();
             httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -30,11 +32,11 @@ public class ProductController {
     }
 
     @GetMapping("/findalls")
-    public ResponseEntity<List<ProductDTO>> findAlls() {
-        HttpStatus httpStatus = HttpStatus.ACCEPTED;
-        List<ProductDTO> result = null;
+    public ResponseEntity<List<UserDTO>> findAlls() {
+        HttpStatus httpStatus = HttpStatus.OK;
+        List<UserDTO> result = null;
         try {
-            result = iproductService.findAll();
+            result = userService.findAlls();
         } catch (Throwable e) {
             e.printStackTrace();
             httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -43,11 +45,11 @@ public class ProductController {
     }
 
     @PostMapping(value = "/update")
-    public ResponseEntity<ProductDTO> createUser(@RequestBody ProductDTO product) {
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user) {
         HttpStatus httpStatus = HttpStatus.CREATED;
-        ProductDTO result = null;
+        UserDTO result = null;
         try {
-            result = iproductService.save(product);
+            result = userService.save(user);
         } catch (Throwable e) {
             e.printStackTrace();
             httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
