@@ -79,7 +79,7 @@ public class MultiplyNumbers {
         }
     }
 
-    private void printArray(String[] arr) {
+    private void printArray(Object[] arr) {
         if (arr.length > 0) {
             var builder = new StringBuilder("B[");
             for (int i = 0; i < arr.length - 1; i++) {
