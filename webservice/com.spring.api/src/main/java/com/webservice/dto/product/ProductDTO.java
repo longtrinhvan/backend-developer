@@ -41,4 +41,5 @@ public class ProductDTO implements Serializable {
     public String keyword;
 
     public String url;
+
 }

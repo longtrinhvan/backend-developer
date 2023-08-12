@@ -1,4 +1,4 @@
-package com.webservice.datastructuresandalgorithms;
+package com.webservice.java.datastructuresandalgorithms;
 
 
 import java.util.Arrays;

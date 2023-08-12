@@ -1,5 +1,8 @@
-package com.webservice.datastructuresandalgorithms;
+package com.webservice.java.datastructuresandalgorithms;
 
+
+import java.util.ArrayList;
+import java.util.TreeSet;
 
 class TestMultiplyNumbers{
     public static void main(String[] args) {
@@ -34,7 +37,7 @@ public class MultiplyNumbers {
             for (int k = 2; k <= A.length; k++) {
                 lengthB += 2 * (k - 2);
             }
-            int[] B = new int[lengthB];
+            Integer[] B = new Integer[lengthB];
             int currentIndex = 0;
             for (int j = A.length - 2; j >= 0; j--) {
                 for (int i = A.length - 1; i > 0; i--) {
@@ -68,23 +71,15 @@ public class MultiplyNumbers {
         }
     }
 
-    private void printArray(int[] arr) {
+    private <T> void printArray(T[] arr) {
         if (arr.length > 0) {
             var builder = new StringBuilder("B[");
             for (int i = 0; i < arr.length - 1; i++) {
                 builder.append(arr[i]).append(", ");
             }
-            builder.append(arr[arr.length - 1]).append("]");
-            System.out.println(builder.toString());
-        }
-    }
 
-    private void printArray(Object[] arr) {
-        if (arr.length > 0) {
-            var builder = new StringBuilder("B[");
-            for (int i = 0; i < arr.length - 1; i++) {
-                builder.append(arr[i]).append(", ");
-            }
+            ArrayList<String> cc = new ArrayList<>();
+            TreeSet<String> treeSet = new TreeSet<String>();
             builder.append(arr[arr.length - 1]).append("]");
             System.out.println(builder.toString());
         }
