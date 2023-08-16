@@ -1,13 +1,19 @@
 package com.webservice.java.collection;
 
-import java.util.ArrayDeque;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 public class InterfaceQueue {
     public static void main(String[] args) {
-        Queue<String> queue = new LinkedList<>();
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(1);
+        queue.add(2);
+        queue.add(3);
+        queue.offer(2);
+        // Lấy phần tử ra khỏi hàng đợi và in ra
+        while (!queue.isEmpty()) {
+            int element = queue.poll(); // Lấy phần tử đầu tiên ra khỏi hàng đợi
+            System.out.println("Element: " + element);
+        }
 
         PriorityQueue<String> priorityQueue = new PriorityQueue<>();
 

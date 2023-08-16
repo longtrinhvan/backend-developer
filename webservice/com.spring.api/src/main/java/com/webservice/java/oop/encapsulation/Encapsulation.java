@@ -5,7 +5,7 @@ import com.google.common.base.Strings;
 import java.util.Date;
 
 /**
- * Đóng gói là kỹ thuật quản lý dữ liệu và hành vi của 1 đối tượng: bằng cách ẩn và hiển chúng theo phạm vi tùy mục đích sử dụng.
+ * Đóng gói là kỹ thuật để che giấu thông tin và triển khai hành vi của đối tượng, đồng thời cung cấp giao diện để tương tắc đối với tượng đó
  * Khác với trừ tượng ở chỗ : mục đích và đối tượng hướng tới
  * - ĐÓNG GÓI: quyết định phạm vi (giới hạn/ bảo vệ có chọn lọc) dữ liệu và hành vi - từ đó tạo mối liên kết giữa thuộc tính và phương thức
  * - TRỪU TƯỢNG: ẩn đi chi tiết/ các logic/ các triển khai phức tạp trong code

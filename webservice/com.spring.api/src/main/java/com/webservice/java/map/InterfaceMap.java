@@ -1,6 +1,7 @@
 package com.webservice.java.map;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
 /**
@@ -61,5 +62,8 @@ public class InterfaceMap {
          *root.left.right = new TreeNode(9);
          *root.right.left = new TreeNode(11);
          */
+
+        ConcurrentHashMap<Integer,Integer> a = new ConcurrentHashMap<>();
+        a.put(1,1);
     }
 }

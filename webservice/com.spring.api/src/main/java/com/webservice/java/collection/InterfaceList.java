@@ -20,16 +20,18 @@ public class InterfaceList {
          * - cho phép truy cập ngẫu nhiên theo index
          * - arraylist không hỗ trợ đồng bộ -khác với vector
          */
-        List<String> l1 = new ArrayList<>();
+        ArrayList<String> l1 = new ArrayList<>();
+        l1.add("");
         l1.get(1);
         Iterator<String> iterator1 = l1.iterator();
         /**
          * LinkedList là danh sách liên kết đôi
          */
-        List<String> l2 = new LinkedList<>();
+        LinkedList<String> l2 = new LinkedList<>();
         /**
          * cho phép lấy theo index, nhưng phải duyệt lại từ đầu danh sách để tính index nên chậm
          */
+        l2.add("NO");
         l2.get(1);
         Iterator<String> iterator2 = l2.iterator();
 
@@ -37,13 +39,15 @@ public class InterfaceList {
          * Vector là một danh sách động có hỗ trợ đồng bộ
          * có các tính chất của arraylist nhưng thêm sync( đồng bộ) nên việc thêm, sửa, xóa chậm trong môi trường đơn luồng
          */
-        List<String> l3 = new Vector<>();
+        Vector<String> l3 = new Vector<>();
+        l3.add("");
         Iterator<String> iterator3 = l3.iterator();
 
         /**
          * Stack là 1 ngăn xếp không phải là 1 danh sách, Stack được mở rộng từ vertor
          */
-        List<String> l4 = new Stack<>();
+        Stack<String> l4 = new Stack<>();
+        l4.add("NO");
         Iterator<String> iterator4 = l4.iterator();
     }
 }

@@ -23,6 +23,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'mysql:mysql-connector-java:8.0.13'
     implementation 'org.springdoc:springdoc-openapi-ui:1.5.9'
+    // https://mvnrepository.com/artifact/org.springframework.social/spring-social-facebook
+    implementation group: 'org.springframework.social', name: 'spring-social-facebook', version: '2.0.3.RELEASE'
+    // https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf
+//    implementation group: 'org.thymeleaf', name: 'thymeleaf', version: '3.1.2.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     compileOnly 'org.projectlombok:lombok:1.18.20'
