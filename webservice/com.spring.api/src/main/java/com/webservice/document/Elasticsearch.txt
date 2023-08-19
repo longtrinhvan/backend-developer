@@ -1,0 +1,101 @@
+Khi 1 node elasticsearch chết hoặc không khả dụng, ta có thể làm  theo 3 cách sau:
+    - Sử dụng Dynamic Discovery: cung cấp tính năng các node tự động tìm kiếm và tham gia cụm. Khi 1 node chết thì cụm
+    sẽ loại bỏ node đó. bạn không cần phải thay đổi cấu hình của client.
+    - Sử dụng health Checks: kiểm tra sức khỏe từng node và loại nỏ thủ công từng node.
+    - Sử dụng cơ chế phân phối tải của client (Load balancing): Điều chỉnh client đến những node khả dụng
+
+Elasticsearch :
+    -là một hệ thống tìm kiếm và phân tích mã nguồn mở , được xây dựng trên nền tảng Apache Lucene.
+    Nó được thiết kế để lưu trữ, tìm kiếm và phân tích dữ liệu. Sử dụng trong các ứng dụng tìm kiếm, ghi log, tổng hợp
+    hoặc phân tích.
+
+Elasticseach hỗ trợ nhiều kiểu dữ liệu:
+    - Text: Dùng cho văn bản và chuỗi ký tự dài.
+    - Keyword: Dùng cho các giá trị không được phân tích như tên, thẻ, ID
+    - Numeric: bao gồm các kiểu dữ liệu như intger, long, float, double
+    - Date: kiểu dữ liệu ngày tháng
+    - Boolean: dùng cho giá trị đúng/sai
+    - Object: dùng để lưu trữ những kiểu dữ liệu phức tạp
+    - Array: lưu trữ danh sách các giá trị
+    .....
+Định dạng dữ liệu fields, index:
+    - JSON MAPPING -  giúp Elasticsearch hiểu các lưu trữ và sử lý dữ liệu trong các trường tài liệu
+
+Định dạng của documents là JSON
+
+METADATA:
+    - Là các thông tin liên quan đến dữ liệu, không phải dữ liệu chính thức, gồm các thông tin như id tài liều thời gian
+    tạo, thời gian cập nhật, kiểu tài liệu, kiểu field, giúp cho việc quản lý và xử lý dữ liệu. Định dạng của nó là json
+
+FIELD(field - trường ):
+    _ Là 1 thành phần cơ bản của 1 tài liệu trong index. Mỗi tài liệu có thể chứa nhiều trường(field), mỗi trường chứa
+    một giá trị dựa trên kiểu dữ liệu đã định dạng trong JSON MAPPING.
+
+INDEX:
+    _Là 1 bộ các tập tài liệu có cùng kiểu cấu trúc dữ liệu, các field được định nghĩa JSON MAPPING. Các tài liệu trong
+    1 index có id riêng và được quản lý cùng nhau
+    - Index gồm: có shard và replica với mục đính phân phối và sao chép dữ liệu trong môi trường phân tán.
+
+SHARD:
+    - 1 index có nhiều documents, các documents được chia ra thành các đoạn khác nhau để lưu trữ, các đoạn đó được gọi
+    là shard.các shard có thể được lưu trên nhiều node khác nhau, và có thể có nhiều bản sao goi là replica.
+
+REPLICA:
+    - Là bản sao của các shard, có thể tìm kiếm, tổng hợp, ... trực tiếp trên replice nhờ cơ chế làm việc song song của
+    elasticsearch. Số replica bằng số node - 1( đó là shard).
+
+SHARD VÀ REPLICA ĐỀU LƯU TRÊN Ổ ĐĨA - KHÔNG PHẢI TRÊN RAM
+
+TẠI SAO NÊN DÙNG ELASTICSEARCH:
+    - Cơ chế shard và replica trên nhiều node của cụm nhằm xử lý song song nhờ đó tốc độ truy vấn diễn ra nhanh chóng,
+    duy trì hiệu suất và tính sẵn sàng.
+    - Sử dụng cấu trúc chỉ mục ngược:
+    - Caching: Bộ nhớ lưu trữ kết quả trả về
+    - Cấu trúc tối ưu.
+    - Dễ ràng mở rộng bằng cách thêm node - mở rộng theo chiều ngang
+
+CHỈ MỤC NGƯỢC:
+    - Là cách dữ liệu được tổ chức và lưu trữ để thực hiện tìm kiếm.
+    - Cách hoạt động của chỉ mục ngược:
+        + Tách tài liệu thành từng từ
+        + Tạo bản đồ liên kết giữa chúng
+        + Lưu trữ bản đồ: ghi nhận tần suất xuất hiện của mỗi từ trong tài liệu và vị trí của nó trong văn bản.
+        + try vấn và tìm kiếm
+
+APIs: Elasticseach cung cấp các APIs cho việc tạo, đọc, cập nhật, xóa dữ liệu và quản lý cụm.
+
+ELASTICSEACH họat động theo mô hình client- server:
+    - server: các node hoạt động như 1 máy chủ, chịu trách nhiệm lưu trữ và xử lý dữ liệu, cung cấp dịch vụ lưu trữ
+    và tìm kiếm thông qua restAPI.
+    - client: là ứng dụng, công cụ,.. client sử dụng REST API để gửi yêu cầu tới các nodes trong Elasticseach và nhận
+    lại kết quả
+
+NODE MASTER TRONG ELASTICSEACH:
+    - Là NODE đóng vai trò quản lý và điều hướng hoạt động cho các nodes trong cụm.
+    - Các vai trò chính:
+        + Quản lý metadata và cấu hình: duy trì thông tin về các index, shard, replica, và các thiết lập cấu hình trong
+        cụm bằng cách ghi nhận, cập nhật sau đó gửi đến các node. Các node dựa vào đó để quyết định hành động của mình.
+        + Quản lý phân phối: đảm bảo shard và replica được phân phối đều sang các node.
+        + Xác định NODE MASTER
+        + Quản lý tạo, xóa, quản lý index: ghi nhận và quản lý index sau đó gửi thông tin vào các nodes
+
+LỖI HAY GẶP TRONG ELASTICSEARCH:
+
+    - 1 INDEX CÓ QUÁ NHIỀU FIELD: gây tốn thời gian trong phân tích ngôn ngữ và tìm kiếm, việc tải và lưu trữ chậm
+    do load lên từ ổ cứng.
+
+    - TẠO QUÁ NHIỀU REPLICA: ẢNH HƯỞNG VỚI VIỆC SỬ DỤNG DỮ LIỆU THEO THỜI GIAN THỰC(- NGAY KHI UPDATE HOẶC THÊM): Vì dữ
+    liệu cần các bước để phân phối dữ liệu đến các REPLICA, dẫn tới không thể sử dụng ngay dữ liệu do cơ chế song song,
+    dữ liệu được tìm thấy ở node replica đã cũ, hoặc chưa cập nhật hoặc đã xóa hay chưa xóa.
+
+    - KHÔNG GIỚI HẠN FIELD TRẢ VỀ: LÀM CHẬM VÀ NGHẼN Ở CLIENT.
+
+    - INDEX CÓ QUÁ NHIỀU DOCUMENTS: làm việc tìm kiếm chậm do phải quét qua lượng lớn dữ liệu, có thể tạo 1 index alias.
+    một index ảo chi index thành nhiều phân đoạn nhỏ hơn giúp tiến trình được chạy song song, giảm tải cho mỗi
+    index cụ thể
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+    
