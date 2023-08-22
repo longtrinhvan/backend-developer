@@ -1,15 +1,36 @@
-Khi 1 node elasticsearch chết hoặc không khả dụng, ta có thể làm  theo 3 cách sau:
-    - Sử dụng Dynamic Discovery: cung cấp tính năng các node tự động tìm kiếm và tham gia cụm. Khi 1 node chết thì cụm
-    sẽ loại bỏ node đó. bạn không cần phải thay đổi cấu hình của client.
-    - Sử dụng health Checks: kiểm tra sức khỏe từng node và loại nỏ thủ công từng node.
-    - Sử dụng cơ chế phân phối tải của client (Load balancing): Điều chỉnh client đến những node khả dụng
 
-Elasticsearch :
+TỔNG QUAN VỀ ELASTICSEACH
+
+ELASTICSEARCH :
+
     -là một hệ thống tìm kiếm và phân tích mã nguồn mở , được xây dựng trên nền tảng Apache Lucene.
     Nó được thiết kế để lưu trữ, tìm kiếm và phân tích dữ liệu. Sử dụng trong các ứng dụng tìm kiếm, ghi log, tổng hợp
     hoặc phân tích.
 
-Elasticseach hỗ trợ nhiều kiểu dữ liệu:
+ELASTICSEACH HOẠT ĐỘNG THEO MÔ HÌNH CLIENT - SERVER:
+
+    - server: cụm các nodes hoạt động như 1 máy chủ, chịu trách nhiệm lưu trữ và xử lý dữ liệu, cung cấp dịch vụ thông
+    qua restAPI.
+
+    - client: là ứng dụng, công cụ,.. sử dụng, thêm, xóa, sửa dữ liệu của server thông qua REST API mà server cung cấp.
+
+NODE MASTER TRONG CỤM ELASTICSEACH:
+    - Là NODE đóng vai trò quản lý và điều hướng hoạt động cho các nodes trong cụm.
+    - Các vai trò chính:
+        + Xác định NODE MASTER - xác định vai trò
+        + Quản lý phân phối: đảm bảo shard và replica được phân phối đều sang các node.
+        + Quản lý tạo, xóa, quản lý index: ghi nhận và quản lý index sau đó gửi thông tin vào các nodes
+        + Quản lý metadata và cấu hình: duy trì thông tin về các index, shard, replica, và các thiết lập cấu hình trong
+        cụm bằng cách ghi nhận, cập nhật sau đó gửi đến các node. Các node dựa vào đó để quyết định hành động của mình.
+
+CÁCH DỮ LIỆU ĐƯỢC TỔ CHỨC VÀ LƯU TRỮ LÀ LẬP CHỈ MỤC NGƯỢC:
+    - Cách hoạt động của chỉ mục ngược:
+        + Tách tài liệu thành từng từ
+        + Tạo bản đồ liên kết giữa chúng
+        + Lưu trữ bản đồ: ghi nhận tần suất xuất hiện của mỗi từ trong tài liệu và vị trí của nó trong văn bản.
+        + truy vấn và tìm kiếm
+
+ELASTICSEACH HỖ TRỢ NHIỀU KIỂU DỮ LIỆU:
     - Text: Dùng cho văn bản và chuỗi ký tự dài.
     - Keyword: Dùng cho các giá trị không được phân tích như tên, thẻ, ID
     - Numeric: bao gồm các kiểu dữ liệu như intger, long, float, double
@@ -21,13 +42,16 @@ Elasticseach hỗ trợ nhiều kiểu dữ liệu:
 Định dạng dữ liệu fields, index:
     - JSON MAPPING -  giúp Elasticsearch hiểu các lưu trữ và sử lý dữ liệu trong các trường tài liệu
 
-Định dạng của documents là JSON
+ĐỊNH DẠNG CỦA DOCUMENTS LÀ JSON
 
 METADATA:
-    - Là các thông tin liên quan đến dữ liệu, không phải dữ liệu chính thức, gồm các thông tin như id tài liều thời gian
+    - Là các thông tin liên quan đến dữ liệu, không phải dữ liệu chính thức, gồm các thông tin như id tài liệu, thời gian
     tạo, thời gian cập nhật, kiểu tài liệu, kiểu field, giúp cho việc quản lý và xử lý dữ liệu. Định dạng của nó là json
+------------------------------------------------------------------------------------------------------------------------
 
-FIELD(field - trường ):
+CÁC THÀNH PHẦN TRONG LASTICSEARCH:
+
+FIELD(field - trường):
     _ Là 1 thành phần cơ bản của 1 tài liệu trong index. Mỗi tài liệu có thể chứa nhiều trường(field), mỗi trường chứa
     một giá trị dựa trên kiểu dữ liệu đã định dạng trong JSON MAPPING.
 
@@ -38,13 +62,14 @@ INDEX:
 
 SHARD:
     - 1 index có nhiều documents, các documents được chia ra thành các đoạn khác nhau để lưu trữ, các đoạn đó được gọi
-    là shard.các shard có thể được lưu trên nhiều node khác nhau, và có thể có nhiều bản sao goi là replica.
+    là shard.các shard có thể được lưu trên nhiều node khác nhau, và có thể có nhiều bản sao gọi là replica.
 
 REPLICA:
-    - Là bản sao của các shard, có thể tìm kiếm, tổng hợp, ... trực tiếp trên replice nhờ cơ chế làm việc song song của
-    elasticsearch. Số replica bằng số node - 1( đó là shard).
+    - Là bản sao của các shard, ... việc tìm kiếm có thể thực hiện trực tiếp trên replica . Số replica bằng số node - 1
+    ( đó là shard).
 
 SHARD VÀ REPLICA ĐỀU LƯU TRÊN Ổ ĐĨA - KHÔNG PHẢI TRÊN RAM
+------------------------------------------------------------------------------------------------------------------------
 
 TẠI SAO NÊN DÙNG ELASTICSEARCH:
     - Cơ chế shard và replica trên nhiều node của cụm nhằm xử lý song song nhờ đó tốc độ truy vấn diễn ra nhanh chóng,
@@ -54,35 +79,19 @@ TẠI SAO NÊN DÙNG ELASTICSEARCH:
     - Cấu trúc tối ưu.
     - Dễ ràng mở rộng bằng cách thêm node - mở rộng theo chiều ngang
 
-CHỈ MỤC NGƯỢC:
-    - Là cách dữ liệu được tổ chức và lưu trữ để thực hiện tìm kiếm.
-    - Cách hoạt động của chỉ mục ngược:
-        + Tách tài liệu thành từng từ
-        + Tạo bản đồ liên kết giữa chúng
-        + Lưu trữ bản đồ: ghi nhận tần suất xuất hiện của mỗi từ trong tài liệu và vị trí của nó trong văn bản.
-        + try vấn và tìm kiếm
-
 APIs: Elasticseach cung cấp các APIs cho việc tạo, đọc, cập nhật, xóa dữ liệu và quản lý cụm.
+------------------------------------------------------------------------------------------------------------------------
 
-ELASTICSEACH họat động theo mô hình client- server:
-    - server: các node hoạt động như 1 máy chủ, chịu trách nhiệm lưu trữ và xử lý dữ liệu, cung cấp dịch vụ lưu trữ
-    và tìm kiếm thông qua restAPI.
-    - client: là ứng dụng, công cụ,.. client sử dụng REST API để gửi yêu cầu tới các nodes trong Elasticseach và nhận
-    lại kết quả
-
-NODE MASTER TRONG ELASTICSEACH:
-    - Là NODE đóng vai trò quản lý và điều hướng hoạt động cho các nodes trong cụm.
-    - Các vai trò chính:
-        + Quản lý metadata và cấu hình: duy trì thông tin về các index, shard, replica, và các thiết lập cấu hình trong
-        cụm bằng cách ghi nhận, cập nhật sau đó gửi đến các node. Các node dựa vào đó để quyết định hành động của mình.
-        + Quản lý phân phối: đảm bảo shard và replica được phân phối đều sang các node.
-        + Xác định NODE MASTER
-        + Quản lý tạo, xóa, quản lý index: ghi nhận và quản lý index sau đó gửi thông tin vào các nodes
+KHI 1 NODE ELASTICSEARCH KHÔNG KHẢ DỤNG (CHẾT), TA CÓ THỂ LÀM THEO 3 CÁCH SAU:
+    - Sử dụng Dynamic Discovery: cung cấp tính năng các node tự động tìm kiếm và tham gia cụm. Khi 1 node chết thì cụm
+    sẽ loại bỏ node đó.
+    - Sử dụng health Checks: kiểm tra sức khỏe từng node và loại nỏ thủ công từng node.
+    - Sử dụng cơ chế phân phối tải của client (Load balancing): Điều chỉnh client đến những node khả dụng
+------------------------------------------------------------------------------------------------------------------------
 
 LỖI HAY GẶP TRONG ELASTICSEARCH:
 
     - 1 INDEX CÓ QUÁ NHIỀU FIELD: gây tốn thời gian trong phân tích ngôn ngữ và tìm kiếm, việc tải và lưu trữ chậm
-    do load lên từ ổ cứng.
 
     - TẠO QUÁ NHIỀU REPLICA: ẢNH HƯỞNG VỚI VIỆC SỬ DỤNG DỮ LIỆU THEO THỜI GIAN THỰC(- NGAY KHI UPDATE HOẶC THÊM): Vì dữ
     liệu cần các bước để phân phối dữ liệu đến các REPLICA, dẫn tới không thể sử dụng ngay dữ liệu do cơ chế song song,
@@ -91,9 +100,85 @@ LỖI HAY GẶP TRONG ELASTICSEARCH:
     - KHÔNG GIỚI HẠN FIELD TRẢ VỀ: LÀM CHẬM VÀ NGHẼN Ở CLIENT.
 
     - INDEX CÓ QUÁ NHIỀU DOCUMENTS: làm việc tìm kiếm chậm do phải quét qua lượng lớn dữ liệu, có thể tạo 1 index alias.
-    một index ảo chi index thành nhiều phân đoạn nhỏ hơn giúp tiến trình được chạy song song, giảm tải cho mỗi
-    index cụ thể
+    một index ảo chia index thành nhiều phân đoạn nhỏ hơn giúp tiến trình được chạy song song.
 ------------------------------------------------------------------------------------------------------------------------
+
+TỐI ƯU TRUY VẤN TRONG ELASTICSEACH
+LINK:
+https://opster.com/blogs/improve-elasticsearch-search-performance/
+SIZE PARAMETER:
+- Tham số SIZE để xác định số lượng kết quả trả về tối đa mà 1 truy vấn có thể trả về. Cố gắng trả về
+1 lượng lớn kết quả dến đến các vấn đề về hiệu suất, bộ nhớ và thời gian xử lý.
+
+SHARDS AND REPLICAS:
+- Đảm bào cân bằng giữa shards và replicas. Shard chia 1 tệp document thành nhiều đoạn, sẽ ghi được trên nhiều node và
+thời gian xử lý và tài nguyên search trên các node đó được chia ra các node . Replicas thì backup shard, hỗ
+trợ tìm kiếm trên replicas giúp thực hiện tìm kiếm trên nhiều node.
+
+DELETED DOCUMENTS:
+- Thường xuyên loại bỏ những documents không có giá trị, giảm dung lượng cho index
+
+SEARCH FILTERS
+- Cân nhắc dùng filters cho các tìm kiếm không tính điểm.
+
+MULTI SEARCH
+- Các request liên tục ngay sau khi kết thúc 1 request trước đó và chúng là độc lập nên sử dụng msearch để thực hiện
+search trong 1 request với cơ chế song song.
+
+SOURCE FILTERING:
+- Chỉ nên trả về những field cần thiết, lọc bỏ những field không sử dụng để giảm lượng dữ liệu truyền về client
+
+TERM QUERIES:
+- Sử dụng truy vấn thuật ngữ khi cần đối sánh chính xác - termQuery  thay vì các search như QueryString, MatchQuery  vì
+truy vấn thuật ngữ không cần phân tích văn bản
+
+MULTITUDE OF SMALL SHARDS
+- Hạn chế chia nhỏ các shards vì nó có thể gây ra các xung đột trong mạng nội bộ giữa các nodes
+------------------------------------------------------------------------------------------------------------------------
+
+QUERY DSL
+- Là loại truy vấn linh hoạt được sử dụng trong ELASTICSEARCH:
+    + BOOLQUERY: truy vấn logic sử dụng toán tử AND, OR, NOT
+    + MACTH QUERY: Sử dụng để tìm kiếm 1 cụm từ cụ thể trong 1 trường
+    + TERM QUERY: truy vấn giá trị chính xác, không phân tích
+    + RANGER QUERY: tìm kiếm tài liệu cụ thể trong 1 phạm vi nhất định
+    + PREFIX QUERY: Dùng để tìm kiếm các tài liệu có tiền tố cụ thể
+    + FUZZY QUERY: tìm kiếm tài liệu tương đồng về ngữ nghĩa
+    + SCRIPT QUERY: sử dụng đoạn mã script để truy vấn
+    + EXITS QUERY: Dùng đề tìm kiếm các tài liệu có trường cụ thể tồi tại
+    + FUNCTION SCORE QUERY: Cho phép tùy chỉnh điểm của tài liệu dựa trên hàm tính điểm
+    + GEO QUERIES: tìm kiếm dựa trên thông tin địa lý.
+    + MACTCH PHRASE QUERY: Sử dụng để tìm kiếm tài liệu cụ thể theo thứ tự cụ thể
+------------------------------------------------------------------------------------------------------------------------
+
+AGGREGATION :
+- Trích xuất thông tin theo các tiêu chí như tổng hợp, nhóm, thống kê.
+- 1 SỐ LOẠI AGGREGATION:
+    + TERMS AGGREGATION: Tạo ra các nhóm giá trị dựa trên 1 trường cụ thể - buckets, giúp đếm số lượng, tìm tophits,..
+    + RANGE AGGRETATION: Dùng để tạo khoảng giá trị và đếm số lượng tài liệu
+    + AVG: TÍNH GIÁ TRỊ TRUNG BÌNH CỦA 1 TRƯỜNG TRONG TÀI LIỆU
+    + SUM: TÍNH TỔNG GIÁ TRỊ CỦA 1 TRƯỜNG TRONG TÀI LIỆU
+    + MIN: TÌM GIÁ TRỊ NHỎ NHẤT CỦA 1 TRƯỜNG TRONG TÀI LIỆU
+    + MAX: TÌM GIÁ TRỊ LỚN NHẤT CỦA 1 TRƯỜNG TRONG TÀI LIỆU
+    + TOP HITS: LẤY CÁC TÀI LIỆU HÀNG ĐẦU TRONG TỪNG NHÓM ĐƯỢC TẠO BỞI AGGREGATION
+    + FIILTER: ÁP DỤNG BỘ LỌC TRƯỚC KHI THỰC HIỆN CÁC AGGREGATION
+    + SCRIPTED METRIC AGGRETATION: THỰC HIỆN CÁC TÍNH TOÁN TÙY CHỈNH BẰNG ĐOẠN SCRPIT
+------------------------------------------------------------------------------------------------------------------------
+
+SORT:
+    - FIELD SORT: SẮP XẾP DỰA TRÊN GIÁ TRỊ 1 TRƯỜNG
+    - MULTI - LEVEL SORT : THỰC HIỆN SẮP XẾP THEO NHIỀU TRƯỜNG
+    - GEO DISTANCES SORT: SẮP XẾP THEO VỊ TRÍ ĐỊA LÝ
+    - SPRIPT SORT: SẮP XẾP THEO ĐOẠN MÃ SCRIPT
+    - SCORE SORT: SẮP XẾP DỰA TRÊN SỐ ĐIỂM CỦA TÀI LIỆU
+    - CUSTOM SORT: SẮP XẾP DỰA TRÊN HÀM TÍNH ĐIỂM TÙY CHỈNH
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
 
 
 

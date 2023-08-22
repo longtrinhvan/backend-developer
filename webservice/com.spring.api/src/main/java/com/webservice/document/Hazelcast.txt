@@ -1,0 +1,23 @@
+TỔNG QUAN VỀ HAZELCAST
+Hazelcast là 1 mạng lưu trữ trên ram
+Sử dụng cơ chế mạng ngang hàng, không có master và slave, mỗi thành viên trong cụm được cấu hình để hoạt động giống nhau
+
+
+CÁC KIỂU DỮ LIỆU TRONG HAZELCAST:
+- Map: dạng key, value. 1 Map chia làm nhiều partion được lưu ở nhiều node. Bản backup thì chỉ được dùng tới khi partion
+chính gặp sự cố.
+- List: danh sách được chia partion
+- Set: 1 set được chia partion
+- Queue:
+...
+
+TẠI SAO PHẢI SỮ DỤNG HAZELCAST
++ Xây dựng bộ nhớ caching - lưu các kết quả thường xuyên truy cập ở lớp cache
++ Lưu trữ trên ram , giúp truy vấn dữ liệu 1 cách nhanh chóng
++ Persistent Data Store cho phép lưu trữ dữ liệu liên tục và bên vững thông qua database
++ Khả năng mở rộng mở theo chiều ngang
++ Chia nhỏ dữ liệu thành các partion và luu trong các mạng phân tán
+
+LỖI HAY GẶP:
+
+

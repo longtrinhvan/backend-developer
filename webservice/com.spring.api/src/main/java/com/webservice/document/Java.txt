@@ -1,0 +1,267 @@
+CÓ 3 LOẠI BIẾN TRONG JAVA:
+- Biến local:
+    + Nằm trong phương thức, contructer, trong block
+    + Khởi tạo bên trong phương thức, contructor, block, và kết thúc khi phương thức, contructer, block kết thúc
+    + Không sử dụng được access modifier
+    + Biến local lưu trong bộ nhớ stack
+
+- Biến Instance:
+    + Nằm bên trong class và bên ngoài các phương thức, block, contructer
+    + Lưu trong hộ nhớ heap
+    + Sử dụng được các access modifier
+    + Khởi tạo khi đối tượng được khởi tạo, bên trong contructer, block hoặc bên trong phương thức, bị hủy khi đối tượng
+    bị hủy
+
+- Biến static:
+    + bên trong class, bên ngoài các phương thức, block, contructer
+    + Khai báo bởi từ khóa static
+    + Sử dụng được access modifier
+    + Lưu trong bộ nhớ static
+    + Khởi tạo khi chương trình chạy và kếy thúc khi chương trình kết thúc
+    + Có thể truy cập trực tiếp thông qua class
+------------------------------------------------------------------------------------------------------------------------
+
+ACCESS MODIFIER: LÀ KHAI BAO GIỚI HẠN TRUY CẬP CHO CLASS, CHO BIẾN, THUỘC TÍNH, PHƯƠNG PHỨC, ĐỐI TƯỢNG,...
+- CÓ 4 LOẠI ACCESS MODIFIER
+    + private: giới hạn bên trong class
+    + default: giới hạn bên trong package
+    + protected: giới bạn bên trong package và bên ngoài package bới package con
+    + public: không giới hạn truy cập
+------------------------------------------------------------------------------------------------------------------------
+
+OOP LÀ LẬP TRÌNH HƯỚNG ĐỐI TƯỢNG VỚI 4 TÍNH CHẤT CHÍNH
+
+- TÍNH ĐÓNG GÓI: là kỹ thuật che giấu thông tin, dữ liệu của thuộc tính, phương thức bên trong 1 đối tượng và hiển thị
+giao diện để tương tác với các đối tượng đó. Thể hiện qua các access modifier
+
+- TÍNH KẾ THỪA: là kỹ thuật lớp con sử dụng lại thuộc tính, phương thức của lớp cha thông qua từ khóa extands. Có 3 loại
+kế thừa:
+    + Đơn kế thừa: 1 class con chỉ kế thừa 1 class cha
+
+    + Kế thừa nhiều cấp: lớp con kế thừa 1 lớp, và lớp đó lại kế thừa bởi 1 lớp khác,...
+
+    + Kế thừa thứ bậc: trường hợp lớp cha có 2, hoặc nhiều lớp con
+
+ TÍNH ĐA HÌNH: là kỹ thuật cho phép 1 phương thức, 1 hành động được thực hiện theo nhiều cách khác nhau
+
+    + Đa hình lúc biên dịch: nạp chồng (overloading) đó là việc các phương thức có cùng tên nhưng khác params, có cùng
+    hoặc khác kiểu dữ liệu trả về, được xảy ta trong cùng 1 class
+
+    + Đa hình lúc runtime: ghi đè là việc lớp con ghi đè phương thức của lớp cha, tên hàm, tên phương thức và kiểu dữ
+    liệu phải giống với lớp cha.
+
+- TÍNH TRỪU TƯỢNG: là việc ẩn di những triển khai, những code logic phức tạp của 1 phương thức, 1 hành động, chỉ hiển
+thị giao diện tương tác. Thể hiện qua abstract và interface:
+
+    + ABSTRACT là 1 class, nó là 1 trừu tượng không hoàn toàn, có thể triển khai thân hàm(body) ở những phương thức
+    không trừ tượng.
+
+   + INTERFACE là 1 khuôn mẫu triển khai bởi từ khóa interface, 1 trừu trượng 100%, có đa kế thừa, các phương thức bên trong 1
+   interface đều là trừu tượng và không có triển khai( không có thân hàm).
+------------------------------------------------------------------------------------------------------------------------
+
+STRING VÀ STRINGBUFFER
+- String và StringBuffer đều là các đối tượng làm việc với chuỗi:
+- Khác :
+    + String khi cộng chuỗi là tạo mới 1 đối tượng, còn StringBuffer là thêm trên đối tượng đó
+    + String là 1 mảng động, còn StringBuffer là 1 danh sách liên kết đôi
+    + StringBuffer hỗ trợ đa luồng
+------------------------------------------------------------------------------------------------------------------------
+
+STRINGBUFFER VÀ STRINGBUILDER
+    + StringBuilder không có cơ chế đa luồng nên nhanh hơn StringBuffer
+------------------------------------------------------------------------------------------------------------------------
+
+CLASS VÀ OBJECT
++ Class là 1 khuôn mẫu để thiết kế nên Object. Object là 1 thể hiện riêng biệt của class
++ Class có biến, phương thức. Còn trong đối tượng là thuộc tính và hành động
+------------------------------------------------------------------------------------------------------------------------
+
+OBJECT VÀ ENTTIY
+    + Object là thực thể cụ thể 1 đối tượng, Entity thường được sử dụng đề cập đến đối tượng hoặc thực thể trong thế
+    giới thực hoặc ứng dụng.
+------------------------------------------------------------------------------------------------------------------------
+
+THIS: Là từ khóa để tham chiếu đến thuộc tính, phương thức, contructer, block trong 1 class
+SUPER: là từ khóa tham chiếu đến thuộc tính, phương thức, contructer, block của lớp cha
+CONTRUCTER: là 1 phương thức để khởi tạo 1 đối tượng, có cùng tên với class, có thể có tham số hoặc không.
+DEPENDENTY INJECTION: là kỹ thuật tiêm 1 đối tượng vào trong 1 đối tượng khác thông qua setter, contructer
+hoặc @Autowired,...
+------------------------------------------------------------------------------------------------------------------------
+
+DESIGN PATTERN: LÀ CÁC MẪU THIẾT KẾ TRONG LÂP TRÌNH HƯỚNG ĐỐI TƯỢNG
+CÓ 3 LOẠI DESIGN PATTERN CHÍNH:
+LOẠI KHỞI TẠO - CREATIONAL PATTERNS:
+    + Singleton : là mẫu thiết kế đảm bảo rằng lớp chỉ có duy nhất 1 instance - 1 thể hiện
+    + Factory Design Pattern là 1 mẫu thiết kế 1 lớp trừu trượng để định nghĩa giao diện trong việc tạo đối tượng
+LOẠI CẤU TRÚC - STRUCTURAL PATTERNS: MVC, DAO
+LOẠI HÀNH VI - BEHAVIORAL PATTERNS: tạp trung vào cách các đối tượng tương tác với nhau và chia sẽ dữ liệu
+------------------------------------------------------------------------------------------------------------------------
+
+EQUALS VS HASHCODE
+- equals() là thương thức so sánh đối tượng theo thuộc tính, hai đối tượng được gọi là bằng nhau khi các thuộc tính là
+giống nhau và cùng 1 class
+- hashCode(): là phương thức trả về mã băm để xác định lưu trữ cho đối tượng, áp dụng trong hashSet, hashmap,
+linkedhashSet, Linkedhashmap.
+------------------------------------------------------------------------------------------------------------------------
+
+TOÁN TỬ '==' và equals()
+- toán tử '==' so sánh 2 đối tượng, 2 thuọc tính. 2 đối tượng, 2 thuộc tính bằng nhau khi cùng tham chiếu địa chỉ lưu
+giá trị.
+- equals(): so sánh đối tượng theo thuộc tính
+------------------------------------------------------------------------------------------------------------------------
+
+TOÁN TỬ INSTANCEOF
+- Toán tử instanceof: sử dụng để kiểm tra 1 đối tượng có phải là 1 thể hiện của 1 kiểu dữ liệu cụ thể không( 1 class,
+1 class con, interface)
+------------------------------------------------------------------------------------------------------------------------
+
+COLLECTION
+- Collection là 1 interface trong java, thuộc gói java.util. Collecion cung cấp các interface như List, set, queue.
+- Map không nằm trong collection nhưng cùng nằm trong goi java.util;
+
+CÁC INTERFACE TRONG COLLECTION:
+
+- LIST:
+
+    + ArrayList:
+        * ArrayList là 1 mảng động, có thể tự động tăng kích thước.
+        * Các phần tử trong 1 mảng lưu trữ liên tiếp nhau.
+        * ArrayList có 2 loại kích thước là kích thước mặc định để tăng mảng khi đầy phần tử(tăng 50%) kích thước mảng
+        và size() là số phần tử mảng.
+        * Cho phép truy cập trực tiếp thông qua index, nên lấy ra nhanh.
+        * Cơ chế tự động tăng và các phần tử lưu trữ liên tiếp nhau dẫn đến thêm, xóa thường chậm
+        * Cập nhật không ảnh hưởng tới hiệu suất
+        * Duy trì thứ tự truyền vào
+        * Không hỗ trợ đa luồng
+
+    + LinkedList:
+        * là 1 danh sách liên kết đôi.
+        * Có thể triển khai như 1 queue
+        * Mỗi node gồm: giá trị, địa chỉ liền trước và địa chỉ liền sau của phần tử
+        * Các phần tử không cần lưu trữ liền nhau
+        * Cho phép thêm vào đầu và cuối danh sách
+        * Cho phép duy trì thứ tự truyền vào
+        * Việc thêm vào nhanh
+        * Sửa và duyệt chậm vì phải duyệt lại từ đầu danh sách hoặc duyệt ngược
+        * Không hỗ trợ đa luồng
+
+    + Vertor:
+        * Là 1 mảng động, độ tăng kích thước là 100% khi đầy
+        * Có các tính chất của Mảng động ArrayList và bổ sung sync giúp làm việc trong môi trường đa luồng dẫn tới hiệu
+        suất chậm hơn ArrayList;
+
+- MAP:
+
+    + HashMap:
+        * Có kiểu dữ liệu dạng key, value
+        * Sử dụng key, hàm equals() và hashcode() để sắp xếp vị trí phần tử trong bảng băm
+        * Các phần tử được lưu trữ dựa trên việc xác định index bằng giá trị băm của phương thức hashCode(). Các
+        phần tử trùng index thì sếp chung 1 bucket.
+        * Để lấy 1 phần tử thì chúng cần xác định index bằng giá trị băm từ key. sau đó dùng phương thức equals() để tìm
+        chính xác key
+        * Chúng không duy trì thứ tự truyền vào
+        * Không hỗ trợ đồng bộ
+        * Mỗi bucket là 1 danh sách liên kết đơn, mỗi node gồm: key, value, giá trị mã băm, và địa chỉ của phần tử tiếp
+        theo
+        * Không chứa các key trùng lặp
+
+    + LinkedHashMap:
+        * Có kiểu dữ liệu dạng key, value
+        * Sử dụng key, hàm hashCode() và equals() để sắp xếp vị trí các phần tử trong bảng băm
+        * Các phần tử được lưu vào các Entry, không phải là 1 node.
+        * Entry bao gồm : địa chỉ phần tử liền trước, địa chỉ phần tử liền sau, key, value, mã băm
+        * Các phần tử lưu trữ dựa trên việc tính giá trị băm của key để xác định index. Các phần tử cùng index được xếp
+        vào cùng 1 bucket là 1 danh sách liên kết đôi
+        * Duy trì thứ tự phần tử truyền vào
+        * không hỗ trợ đồng bộ
+        * Không chứa các key trùng lặp
+
+    + TreeMap:
+        * Kiểu dữ liệu dạng key, value
+        * không sử dụng mã băm
+        * Tính toán lưu trữ dựa vào cây nhị nhân
+        * Duy trì thứ tự tăng dần theo giá tri phần tử
+        * Không hỗ trợ đồng bộ
+        * Không chứa các key trùng lặp
+
+    + ConcurrentHashMap:
+        * Có kiểu dữ liệu key, value
+        * Node gồm các: key, value, mã băm, địa chỉ phần tử phía trước
+        * Hỗ trợ đồng bộ trong môi trường đa luồng
+        * Hỗ trợ chia nhỏ dữ liệu thành phần nhỏ - các segment
+        * Hỗ trợ chạy đồng thời trên các segment
+
+    |------------------------------------------------------------------------------------------------------------------|
+    |- Chạy đồng thời - Concurrent: Thực hiện nhiều tác vụ khác nhau cùng 1 lúc nhưng không nhất thiết cùng 1 thời điểm|
+    |- Chạy song song - Parallel: Thực hiện các tác vụ giống nhau cùng 1 lúc tại cùng 1 thời điểm.                     |
+    |------------------------------------------------------------------------------------------------------------------|
+
+- SET:
+
+    + HashSet:
+        * Là 1 tập hợp các phần tử không có giá trị trùng lặp
+        * Cách thức lưu trữ dựa trên cơ chế của hashMap
+        * Phần tử truyền vào đóng vai trò như 1 key trong hashMap, value là 1 Object mặc định
+        * Hashset danh sách các key trong HashMap
+        * Không hỗ trợ đồng bộ
+        * Phần tử trùng lặp sẽ không được ghi vào trong HashSet
+
+    + LinkedHashSet:
+        * Là 1 tập hợp các phần tử không có giá trị trùng lặp
+        * Cách thức lưu trữ dựa trên cơ chế của LinkedHashMap
+        * Phần tử truyền vào đóng vai trò như 1 key trong LinkedHashMap, value là 1 Object mặc định
+        * là 1 danh sách các key của LinkedHashMap
+        * Không hỗ trợ đồng bộ
+        * Phần tử trùng lặp sẽ không được ghi vào trong LinkedHashSet
+
+    + TreeSet:
+        * Là 1 tập hợp các phần tử không có giá trị trùng lặp
+        * Cách thức lưu trữ dựa trên TreeMap
+        * Phần tử truyền vào đóng cai trò như 1 key,Object là 1 Object mặc định
+        * TreeSet là danh sách các key trong Treemap
+        * Không hỗ trợ đồng bộ
+        * Phần tử trùng lặp sẽ được được khi vào trong TreeSet
+        * Duy trì thứ tự tăng dần theo giá trị của phần tử
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+CÁC CƠ CHẾ ĐỒNG BỘ HÓA TRONG JAVA
+- ReentrantLock
+- Synchronized
+* ConcurrentHashMap
+------------------------------------------------------------------------------------------------------------------------
+
+ITERATOR:
++ Dùng để duyệt qua các phần tử từ đầu đến cuối của 1 COLLECTION
++ Xóa phần tử khi lặp COLLECTION
+
+------------------------------------------------------------------------------------------------------------------------
+COLLECTIONS:
+Sử dụng để lưu trữ , quản lý và thao tác trong các các trúc dữ liệu List,Set, Queue
+STREAMS:
++ Streams không dùng để lưu  trữ
++ Sử dụng để thực hiện các phép biến đổi, tính toán và xử lý dữ liệu một cách dễ dàng
++ Hỗ trợ parallel
+
+BIỂU THỨC LAMDA: làm 1 hàm ẩn danh, không có tên, không thuộc lớp nào, không có phạm vi truy cập, không khai báo kiểu
+trả về. cho phép người dùng chuyển phương thức thành đối số.
+Ví dụ : names.forEach(name -> System.out.println(name));
+
+------------------------------------------------------------------------------------------------------------------------
+Spring là 1 framework để phát triển ứng dụng java. Cung cấp các tính năng và module cho phát triển ứng dụng java
+
+SptringBoot là 1 framework phát triển từ Spring giúp tự động cấu hình và cung cấp các giá trị mặc định
+
+application.properties là file cấu hình của các dự án SpingBoot
+
+Bean trong java:
+ - Annotion :
+    + Tạo bean bằng @Configuration và @Bean
+    + Tạo bean bằng @Component
+
+ - File XML
+
+ ApplicationContext là 1 giao diện trong String Framework để chứa và quản lý các bean trong ứng dụng
+

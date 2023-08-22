@@ -1,0 +1,31 @@
+
+TỔNG QUAN VỀ APACHE FLINK
+
+- APACHE FLINK:  là hệ thống mã nguồn mở và phân tán dùng để xử liệu dữ liệu liên tục và thời gian thực( stream
+processing) và xử lý hàng loạt theo lôi( batch processing), đồng thời cũng xử lý các tác vụ hàng loạt
+
+- ĐIỂM MẠNH CỦA FLINK:
+
+    + Là ứng dụng quản lý tài nguyên mạnh mẽ
+
+    + Quản lý được nhiều stask vụ đồng thời trong 1 proccessing
+
+    + Lưu giữ trạng thái processing khi xảy ra xự cố và khi off
+
+    + Cung cấp nhiều api xử lý dữ liệu theo chuẩn
+
+    + Cung cấp cơ chế stream data và batch data
+
+    + Cung cấp giao diện quản lý
+
+- THƯ VIỆN DÙNG:
+
+    - FLINK CORE:
+        + Check point: check cấu hình, trạng thái lưu trữ - để restart nhanh chóng( khả năng hồi phục) , timeout,...
+
+    - FLINK STREAM:
+        + DataStream: cung cấp các xử lý liên quan đến stream như reduce, parallel, fillter, map ..
+
+    - FLINK KAFKA: tích hợp với APACHE KAFKA, hình thành nên 1 tác vụ đồng thời
+
+    - FLINK ELASTICSEARCH: tích hợp với ELASTICSEARCH, hình thành nên 1 tác vụ đồng thời.

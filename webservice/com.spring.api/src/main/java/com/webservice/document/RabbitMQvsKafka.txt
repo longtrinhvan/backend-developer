@@ -1,0 +1,125 @@
+
+HỆ THỐNG MESSAGE BROKER
+
+- Là 1 phền mềm trung gian trong hệ thống phân tán và sử dụng phổ biến trong nhiều ứng dụng. Nó giúp quản lý việc truyền
+tải thông điệp giữa các thành phần trong môi trường phân tán. Cụ thể như:
+    + Điều phối các thông điệp: định tuyến và chuyển tiếp các thông điệp từ producer đến consumer
+    + Quản lý hàng đợi: duy trì danh sách hàng đợi, nơi lưu trữ các thông điệp cho đến khi consumer xử lý
+    + Đảm bảo toàn vẹn: đảm bảo lưu trữ message 1 cách toàn vẹn, cũng như đảm bảo thông điệp được gửi và nhận 1 cách
+    đáng tin cậy.
+    + Phân phối công việc: tận dụng tối đa tài nguyên và cân bằng tài nguyên trong cụm server
+
+CÁC LOẠI MESSAGE BROKER PHỔ BIẾN
+    - Rabbitmq: Point-to-Point, publish-subscribe
+    - Apache kafka: sử dụng giao thức publish-subscribe
+    - Apache ActiveMQ: sử dụng giao thức point-to-point và publish-subscribe.
+------------------------------------------------------------------------------------------------------------------------
+
+RABBITMQ duy trì thứ tự dựa trên thời điểm chúng được đưa vào hàng đợi
+APACHE KAFKA duy trì thứ tự dựa trên thời gian (timestmap) được gắn kèm trong message - stream data
+------------------------------------------------------------------------------------------------------------------------
+
+TỔNG QUAN RABBITMQ
+
+- RabbitMQ là một hệ thống message broker mã nguồn mở được sử dụng để quản lý và điều phối các thông điệp giữa các ứng
+dụng trong môi trường phân tán.
+
+- RabbitMQ được viết bằng ngôn ngữ Erlang, sở dĩ có thể chạy trên nhiều nền tảng như java, c#,.. vì nó cung cấp các thư
+viện client giao tiếp với máy chủ erlang thông qua các giao thức.
+
+- Cụm server RabbitMQ sử dụng kiến trúc mạng ngang hàng peer-to-peer
+
+- RabbitMQ tự động xóa message khi consumer xác nhận đã tiêu thụ thành công.
+
+KIẾN TRÚC CỦA RABBITMQ
+
+- RabbitMQ hoạt động theo kiến trúc client - server, trong đó message broker là máy chủ, producer và consumer là các ứng
+dụng client.
+
+CÁC THÀNH PHẦN CHÍNH
+- PRODUCER:
+    + Tạo và gửi thông điệp đến exchange trong message broker.
+    - Các thành phần chính của Producer:
+        * Connection factory: Tạo đối tượng để cấu hình tới message bao gồm : hostname, port, tên người dùng, mật khẩu,
+        ...
+        * Connection: là 1 kết nối tới broker, và được quản lý bởi connection factory, connection tạo và quản lý các
+        channel được định tuyến rõ ràng để truyền tải message
+        * Channel: là 1 kênh ảo trong kết nối tới Message Broker. Channel có thể thực hiện các chức năng cơ bản như gửi
+        và nhận message tới message broker. Được định tuyến rõ ràng thông qua các cấu hình exchange.
+
+- BROKER:
+
+    + Chịu trách nhiệm quản lý và định tuyến message giữa producer tới consumer.
+
+    + EXCHANGE: Exchange có 5 loại chính:
+        * Direct  Exchange: Định tuyến thông qua key.
+        * Fanout  Exchange: Gửi tới tất cả hàng đợi được liên kết với nó
+        * Topic   Exchange: Định tuyến linh hoạt dựa trên các ký tự * và #
+        * Defaut  Exchange: Gửi trực tiếp đến queue
+        * Headers Exchange: định tuyến với nhiều thuộc tính
+
+    + BINDING:  là 1 thiết lập để xác định ở producer dành cho chanel, sẽ đọc thông tin chanel và đinh truyến message
+
+    + QUEUE: là nơi lưu trữ hàng đợi theo quy tắc vào trước ra trước.
+        * Là nơi lưu trữ tạm thời các message cho đến khi consumer tiêu thụ.
+        * Queue không chia đoạn dữ liệu chính trên nhiều node, data gốc chỉ lưu trên 1 node cụ thể,
+        * Dữ liệu gốc được backup trên nhiều node, có thể có nhiều bản backup.
+
+- CONSUMER:
+    + Là máy khách - client, nơi tiêu thụ  và xác nhận message
+    + Có 2 loại xác nhận message:
+        * ACK: message được client tiêu thụ thành công. message sẽ được xóa khỏi queue.
+        * NACK: message được client xử lý qua nhưng gây lỗi. thông báo để giữ và gửi lại message hoặc định tuyến lại cho
+        message.
+------------------------------------------------------------------------------------------------------------------------
+
+TỔNG QUAN VỀ KAFKA
+
+- APACHE KAFKA là 1 hệ thống message broker mã nguồn mở được phát triển từ ngôn ngữ Scala giúp quản lý và điều phối
+thông điệp trong môi trường phân tán.
+
+- APACHE KAFKA có cơ chế bình bầu ZOOKEEPER MASTER VÀ BROKER MASTER
+
+- KAFKA lưu message được gửi đến trong 1 khỏang thời gian có thể được . Giúp việc kiểm tra nhật khí nhận gửi và chạy
+data theo lô - batch
+
+KIẾN TRÚC CỦA APACHE KAFKA:
+
+- ZOOKEEPER đóng vai trò quản lý và duy trì thông tin METADATA - cấu hình, trạng thái và đồng bộ hóa cụm kafka
+
+- BORKER nhận nhiệm vụ lưu trữ và xử lý thông điệp, quản lý leader, follower, và thực hiện việc sao chép dữ liệu
+
+- CONSUMER GROUP : là 1 group bao gồm các topic
+
+- TOPIC : nơi nhận các sự kiện dữ liệu từ producer và consumer
+
+- PARTION : Mỗi topic được chia thành nhiều phần trên nhiều node và có thể được xử lý song song. Mỗi partion có 1 leader
+riêng để quản lý và sao chép chúng sang các replica.
+
+- REPLICA: Là bản sao của partion, mục đích nhằm bảo vệ tính sẵn sàng
+
+- OFFSET: Mỗi bản ghi trong 1 partion thì có 1 offset duy nhất
+
+- PRODUCERS ACKS:
+
+    + acks = 0: Producer không chờ xác nhận từ broker sau khi gửi tin nhắn
+
+    + acks = 1: Producer chờ xác nhận từ broker sau khi gửi tin nhắn - có thể không được nhân bản
+
+    + acks = -1: Producer chờ xác nhận từ các replica trong broker.
+
+- CONSUMER COMMIT OFFSET: Consumer theo dõi các tin nhắn đã xử lý
+
+LỖI HAY GẶP
+
+    - KEY MESSAGE : Nên tạo key theo giá trị cụ thể cho 1 message để đảm bảo thứ tự đồng bộ
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+XỬ LÝ TRÙNG KEY - TRÙNG DATA
+ - Tạo 1 concurrentHashMap để cache lại data theo key. Lấy timer là version, nếu trùng ky nhưng version mới thì cho phép
+ xử lý và cho vao map. Nếu version cũ thì bỏ xác nhận message đã được xử lý thành công - tức bỏ qua
+ - Xử dụng FLINK để reduce message: Tổng hợp message theo key, sau đó lấy version mới nhất
+
+
